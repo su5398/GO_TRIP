@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!--헤더-->
+    <div class="header">
+        {% include 'header.html' %}
+    <!--여기서 부터 글 보이는 곳-->
+        <div class="section">
+            <h2>여행 코스</h2>
+            <p>자유롭게 여행지를 추천해봅시다.</p>
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="searchArea">
+            <form  action="/blog/search" method="post">
+                {% csrf_token %}
+                <input type="search" class="search" placeholder="가고싶은 지역을 검색해주세요" aria-label="Search" name="q" value="{{q}}" maxlength="10" size="40">
+                <button type="submit" class="search_submit" >검색</button>
+            </form>
+        </div>
+    </div>
+
+<!-- 메인 내용 -->
+    <div class="contain">
+        <div id="columns" style="column-gap: 0px; padding-top: 30px;">
+
+            {% if not blogs %}
+
+                <p align="center">검색 결과가 없습니다</p>
+
+            {% else %}
+
+                {% for post in blogs.all %}
+                    <figure class="blog_figure">
+                        <a href="{% url 'blogapp:detail' post.id %}" style="text-decoration: none; color: black;">
+                            <img class="blog_img" style="width: 350px; height: 400px;" src="{{ post.썸네일.url }}">
+                            <figcaption class="blog_figcaption">{{ post.제목 }}</figcaption>
+                        </a>
+                    </figure>
+                {% endfor %}
+        </div>
+    </div>
+            {% endif %}
+{% endblock %}

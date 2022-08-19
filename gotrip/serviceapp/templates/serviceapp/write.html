@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+    <!--헤더-->
+    <div class="header">
+        {% include 'header.html' %}
+
+        <div class="section">
+            <h2>글 작성</h2>
+            <p>글을 작성해주세요</p>
+        </div>
+        <div class="searchArea">
+          <input type="search" class="search" placeholder="가고싶은 지역을 검색해주세요" maxlength="10" size="40">
+          <input type="submit" class="search_submit" value="검색">
+        </div>
+    </div>
+    <hr style="background-color: white; height: 10px;border: 0px;">
+
+
+<!-- 메인 내용(제출하면 course페이지로 넘어가기) -->
+    <div class="contain">
+        <br><br>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <p align="right">사진 업로드 : <input name="image" type="file"></p>
+
+        </form>
+
+        <form method="POST" action="/course/">
+            {% csrf_token %}
+            <p align=center><input type="submit" value="업로드" class="temp"></p>
+        </form>
+    </div>
+{% endblock %}

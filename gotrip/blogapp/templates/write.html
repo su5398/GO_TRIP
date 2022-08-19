@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    tr {
+        height: 40px;
+    }
+
+</style>
+
+    <!--헤더-->
+    <div class="header">
+        {% include 'header.html' %}
+
+        <div class="section">
+            <h2>글 작성</h2>
+            <p>글을 작성해주세요</p>
+        </div>
+    </div>
+    <div class="line"></div>
+
+
+<!-- 메인 내용(제출하면 course페이지로 넘어가기) -->
+    <div class="contain">
+        <br><br>
+        <div class="base_box" style="text-align: left;">
+            <form action="/blog/write/" method="POST" enctype="multipart/form-data">
+               {% csrf_token %}
+               <table align="center">
+                   <br>
+                  {{form.as_table}}
+               </table>
+
+                <hr>
+                <p align="center"><input type="submit" class="submit" value="글 작성"></p>
+                <br>
+            </form>
+        </div>
+        <br><br>
+
+    </div>
+{% endblock %}

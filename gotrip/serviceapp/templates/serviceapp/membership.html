@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var _name = false;
+        var _id = false;
+        var _pw = false;
+        var _pwch = false;
+        $(document).ready(function () {
+            $('#Name').focus();
+            $('#Name').blur(function (event) {
+                namech();
+            });
+
+            $('#Id').blur(function () {
+                idch();
+            });
+            $('#Pw').blur(function () {
+                pwch();
+            });
+            $('#PwCheck').blur(function () {
+                pwchch();
+            });
+            $('.in').keyup(function (event) {
+                var value1 = $('#tel1').val();
+                if (value1.length > 3) {
+                    $('#tel2').focus();
+                }
+            });
+            $('form').submit(function (event) {
+                namech();
+                idch();
+                pwch();
+                pwchch();
+                if (_name + _id + _pw + _pwch == 4) {
+                    alert('가입을 축하드립니다.');
+                }
+                else {
+                    alert('가입정보를 확인해주세요');
+
+                }
+
+            });
+        });
+        function namech() {
+            var value = $('#Name').val();
+            if (value.replace(/[가-힣]/g, '').length != 0) {
+                $('#name_ch').html('한글만 입력 가능합니다. 다시 입력해주세요.');
+                event.preventDefault();
+                _name = false;
+
+            } else {
+                $('#name_ch').html('');
+                _name = true;
+            }
+
+
+        }
+        function idch() {
+            var value = $('#Id').val();
+            if (value.replace(/[A-Za-z0-9]{5,12}/g, '').length != 0) {
+                $('#id_ch').html('영문과 숫자 조합의 5~12자만 가능합니다. 다시 입력해주세요.');
+                event.preventDefault();
+                _id = false;
+            } else {
+                $('#id_ch').html('');
+                _id = true;
+            }
+        }
+        function pwch() {
+            var value = $('#Pw').val();
+            if (value.replace(/[A-Za-z0-9]{8,12}/g, '').length != 0) {
+                $('#pw_ch').html('영문과 숫자의 조합의 8~12자만 가능합니다. 다시 입력해주세요.');
+                event.preventDefault();
+                _pw = false;
+            } else {
+                $('#pw_ch').html('');
+                _pw = true;
+
+            }
+        }
+        function pwchch() {
+            var value = $('#Pw').val();
+            var value2 = $('#PwCheck').val();
+            if (value != value2) {
+                $('#pwsame').html('비밀번호가 다릅니다. 다시 입력해주세요.');
+                event.preventDefault();
+                _pwch = false;
+
+            } else {
+                $('#pwsame').html('');
+                _pwch = true;
+
+            }
+        }
+    </script>
+<style>
+    .button_ {
+    background-color: white;
+    border: 2px solid skyblue;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    /*글자 수평 정령*/
+    line-height: 40px;
+    /*글자 수직 정령*/
+    font-weight: bold;
+
+    border-radius: 20px;
+    cursor: pointer;
+}
+</style>
+{% block content %}
+    <!--헤더-->
+    <div class="header">
+        {% include 'header.html' %}
+
+        <div class="section">
+            <h2>회원가입</h2>
+            <p>다음 정보를 입력하여 회원가입을 진행해주세요</p>
+        </div>
+        <div class="searchArea">
+          <input type="search" class="search" placeholder="가고싶은 지역을 검색해주세요" maxlength="10" size="40">
+          <input type="submit" class="search_submit" value="검색">
+        </div>
+    </div>
+
+    <hr style="background-color: white; height: 10px;border: 0px;">
+
+    <section class="contain">
+        <form method="POST" action="/main/">
+           {% csrf_token %}
+            <fieldset>
+                <legend align="center" style="font-size: 50px; font-weight: 800; color: rgb(105, 147, 224);"> 가입 정보
+                </legend>
+                <br>
+                <!--이름 입력-->
+                <div>
+                    <h3 class="info_name"><label><span class="ch" style="color: red;">* </span>이 름 : </label></h3>
+
+                    <span>
+                        <input class="in" type="text" id="Name" placeholder="이름" required>
+                    </span>
+                    <div id="name_ch" style="color: red;"></div>
+
+                </div>
+
+                <!--아이디 입력-->
+                <div>
+                    <h3 class="info_name"><label><span class="ch" style="color: red;">* </span>아 이 디 : </label></h3>
+
+                    <span>
+                        <input class="in" type="text" id="Id" maxlength="12" minlength="5" placeholder="아이디" required>
+                    </span>
+
+                    <div>
+                        * 영문과 숫자의 조합으로 설정해주시기 바랍니다.<br>
+                        * 5자 이상 12 이하로 설정 가능합니다.
+                    </div>
+                    <div id="id_ch" style="color: red;"></div>
+
+                </div>
+
+                <!--비밀번호 입력-->
+                <div>
+                    <h3 class="info_name"><label><span class="ch" style="color: red;">* </span>비밀번호 : </label></h3>
+                    <span>
+
+                        <input class="in" type="password" id="Pw" maxlength="12" placeholder="비밀번호" required>
+                    </span>
+                    <div>
+                        * 영문과 숫자의 조합으로 설정해주시기 바랍니다.<br>
+                        * 8자 이상으로 설정 가능합니다.
+                    </div>
+                    <div id="pw_ch" style="color: red;"></div>
+
+                </div>
+
+
+                <div>
+                    <h3 class="info_name"><label><span class="ch" style="color: red;">* </span>비밀번호 재확인 : </label></h3>
+                    <span>
+
+                        <input class="in" type="password" id="PwCheck" maxlength="12" placeholder="비밀번호 재확인" required>
+                    </span>
+
+                    <div id="pwsame" style="color: red;"></div>
+                </div>
+
+                <div>
+                    <h3 class="info_name"><label>생 일 : </label></h3>
+                    <input class="in" type="date" name=BD value="m">
+
+                </div>
+
+                <div>
+                    <h3 class="info_name"><label>이 메 일 : </label></h3>
+                    <span>
+
+                        <input class="in" class="in" type="text" id="Email" style="width: 30%; display: inline;"
+                            placeholder="이메일"> @
+                        <select>
+                            <option> naver.com </option>
+                            <option> gmail.com </option>
+                            <option> daum.net </option>
+                            <option> korea.ac.kr </option>
+                        </select>
+                    </span>
+                </div>
+
+
+                <div>
+                    <h3 class="info_name"><label>연 락 처 : </label></h3>
+
+                    <span>
+                        <select name="Tel">
+                            <option> 010 </option>
+                            <option> 02 </option>
+                            <option> 011 </option>
+                            <option> 041 </option>
+                            <option> 042 </option>
+                            <option> 054 </option>
+                        </select> -
+                        <input class="in" type="tel" id="tel1" maxlength="4" style="width: 20%; display: inline;"
+                            onclick="formch()"> -
+                        <input class="in" type="tel" id="tel2" maxlength="4" style="width: 20%; display: inline;">
+                    </span>
+                </div>
+
+
+
+                <div>
+                    <h3 class="info_name"><label>취 미 : </label></h3>
+
+                    <input type="checkbox" name=enjoy value="스포츠체험"> 스포츠체험
+                    <input type="checkbox" name=enjoy value="공연관람"> 공연관람
+                    <input type="checkbox" name=enjoy value="만들기"> 만들기
+                    <input type="checkbox" name=enjoy value="문화제관람"> 문화제관람
+                    <input type="checkbox" name=enjoy value="자연구경"> 자연구경
+                </div>
+
+                <br>
+            </fieldset>
+
+            <br>
+            <hr style="border: 1px dashed white; background-color: white;">
+            <br>
+            <p align=center> <input class="button_" type="submit" value="가입하기">
+                <input class="button_" type="reset" value="다시쓰기">
+            </p>
+            <br>
+        </form>
+    </section>
+
+{% endblock %}

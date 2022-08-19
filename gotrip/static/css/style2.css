@@ -1,0 +1,113 @@
+* {
+    margin: auto;
+    padding: auto;
+    box-sizing: border-box;
+
+}
+
+@media screen and (max-width: 767px) {
+}
+
+@media screen and (min-width: 768px) and (max-width: 959px){
+}
+
+.wrap header {
+    width: 90%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap header h1 a {
+    text-decoration: none;
+    color: white;
+    font-family: abster;
+}
+
+
+
+.wrap {
+    width: 1920px;
+    height: 373px;
+    background-repeat: no-repeat;
+    background: url(intro.jpg);
+    margin: 0 auto;
+}
+
+.wrap section {
+    position: relative;
+    top: 13%;
+    color: white;
+    text-align: center;
+}
+
+
+.wrap section .serchArea {
+    width: 310px;
+    height: 40px;
+    background: rgba(256, 256, 256, 0.5);
+    border-radius: 5px;
+    margin-top: 24px;
+    margin: 0 auto;
+
+}
+
+.wrap section .serchArea .search {
+    border: none;
+    width: 250px;
+    height: 40px;
+    background: none;
+    color: black;
+    padding-left: 10px;
+}
+
+.wrap section .serchArea .submit {
+    border: none;
+    width: 50px;
+    height: 30px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container {
+    width: 1920px;
+    height: 100%;
+    background-color: rgba(203, 221, 238, 0.5);
+}
+
+.container button, p input {
+    background-color: white;
+    border: 2px solid skyblue;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    /*글자 수평 정령*/
+    line-height: 40px;
+    /*글자 수직 정령*/
+    font-weight: bold;
+
+    border-radius: 20px;
+    cursor: pointer;
+}
+button>a{
+    text-decoration: none;
+    color: black;
+}
+.container .main {
+    width: 70%;
+    margin: 0 15%;
+    text-align: center;
+    background-color: white;
+    border-radius: 100px;
+    padding-top: 50px;
+}
+.main .course {
+    width: 80%;
+    margin: 0 10%;
+    text-align: center;
+}
+.course img {
+    width: 500px;
+}

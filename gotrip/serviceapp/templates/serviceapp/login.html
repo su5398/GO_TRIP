@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--헤더-->
+    <div class="header">
+        {% include 'header.html' %}
+
+        <div class="section">
+            <h2>로그인</h2>
+            <p>로그인을 해주세요.</p>
+        </div>
+        <div class="searchArea">
+          <input type="search" class="search" placeholder="가고싶은 지역을 검색해주세요" maxlength="10" size="40">
+          <input type="submit" class="search_submit" value="검색">
+        </div>
+    </div>
+
+    <hr style="background-color: white; height: 10px;border: 0px;">
+
+    <!--메인 내용-->
+    <div class="contain">
+        <form method="POST" action="/main/">
+           {% csrf_token %}
+            <fieldset class="base_box">
+                <legend align="center" style="font-size: 50px; font-weight: 800; color: rgb(105, 147, 224);"> 로그인 </legend>
+                <br>
+
+                <!--아이디 입력-->
+                <div style="font-size: 1em;">
+                    <h3 class="info_name" class="login_box"><label><span style="color: red;">* </span>아 이 디 : </label></h3>
+
+                    <span>
+                        <input class="in" type="text" id="Id" maxlength="12" minlength="5" placeholder="아이디" required>
+                    </span>
+
+                    <div id="id_ch" style="color: red;"></div>
+
+                </div>
+
+
+                <!--비밀번호 입력-->
+                <div style="font-size: 1em;">
+                    <h3 class="info_name" class="login_box"><label><span style="color: red;">* </span>비밀번호 : </label></h3>
+                    <span>
+                        <input class="in" type="password" id="Pw" maxlength="12" placeholder="비밀번호" required>
+                    </span>
+                    <div id="pw_ch" style="color: red;"></div>
+                    <br>
+                </div>
+            </fieldset>
+
+            <br>
+            <hr style="border: 1px dashed white; background-color: white;">
+            <br>
+            <p align=center> <input type="submit" value="로그인">
+                <input type="reset" value="아이디/비번찾기">
+            </p>
+            <br>
+        </form>
+    </div>
+
+
+{% endblock %}
